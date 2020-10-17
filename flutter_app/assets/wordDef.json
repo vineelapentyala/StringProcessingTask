@@ -1,0 +1,31 @@
+{  
+    "researcher":{
+    "plural":"researchers",
+    "definition":"a person whose job involves discovering or verifying information for use in a book, program, etc",
+    "example":"radio and TV researchers"},
+    "recall": {
+        "plural": "recalls",
+        "definition": "to call back",
+        "example":"The army recalled many veterans."
+    },
+    "participant":{
+        "plural":"patcipants",
+        "definition":"a person who takes part in something",
+        "example":"eager students would become firsthand participants in an archaeological exploration"
+    },
+    "involvement":{
+        "plural":"involvements",
+        "definition":"the fact or condition of being involved with or participating in something",
+        "example":"he was imprisoned for his involvement in a plot to overthrow the government"
+    },
+    "professor":{
+        "plural":"professors",
+        "definition":"a teacher of the highest rank in a college or university.",
+        "example":"Fred took on the air of a learned professor as he explained"
+    },
+    "learning":{
+        "plural":"learnings",
+        "definition":"the acquisition of knowledge or skills through experience, study, or by being taught",
+        "example":"I liked to parade my learning in front of my sisters"
+    }
+}
