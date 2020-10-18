@@ -20,3 +20,12 @@ Please follow the following link before you proceed further.(https://flutter.dev
 1. Double tap on any word for a definition
 1. If the word is part of the sample json, a definition and an example are displayed
 1. Otherwise the text 'Not Defined' shows up 
+
+**Time Spent On the Project:**
+
+Approximately 8 hrs. It took me a while to try the various options of loading text from .pdf and .docx files
+
+**Improvements/Areas I'd like to work on further:**
+1. Add some unit, widget and integration tests
+1. Add the functionality to load text from URL in addition to local asset
+1. Instead of loading the .json everytime a word is clicked, I would like to explore the option of loading it just once per build/querying it from a cloud Database collection instead of a local .json
