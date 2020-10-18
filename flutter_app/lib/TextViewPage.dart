@@ -5,6 +5,12 @@ import 'package:flutterapp/MessageComponent.dart';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 
+/*
+ * This class is the Text View Page Widget that shows up when either of the buttons in the Home Page is clicked
+ * The text on this page is selctable and when the user double clicks on a word, a query is made to the local .json file 
+ * If this word is present in the json, a dialog box with the word, its definition and an example are displayed
+ * If it is not present in the json, a dialog box with the word and the text "Not Defined" next to definition and Example is displayed
+*/
 class TextViewPage extends StatefulWidget {
   final String contents;
   const TextViewPage ({ Key key, this.contents}): super(key: key);
