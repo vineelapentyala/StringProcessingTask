@@ -1,12 +1,13 @@
 import 'dart:convert';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutterapp/AlertDialogView.dart';
+import 'package:flutterapp/MessageComponent.dart';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 
 class TextViewPage extends StatefulWidget {
+  final String contents;
+  const TextViewPage ({ Key key, this.contents}): super(key: key);
   @override
   _TextViewPageState createState() => _TextViewPageState();
 }
@@ -14,7 +15,7 @@ class TextViewPage extends StatefulWidget {
 class _TextViewPageState extends State<TextViewPage> {
   @override
   Widget build(BuildContext context) {
-    String fullText = 'The researchers found that word recall was greatest when the participants read aloud to themselves.\n\n"This study confirms that learning and memory benefit from active involvement," says study author Colin M. MacLeod, a professor and chair of the Department of Psychology at the University of Waterloo.';
+    String fullText = widget.contents;
     final textSpans = <TextSpan>[];
     fullText.splitMapJoin(
       RegExp('\\w+'),
@@ -55,8 +56,6 @@ class _TextViewPageState extends State<TextViewPage> {
   Future<void> showMyDialog(BuildContext context, String displayText)async {
     //check if you can load something just once everytime the user opens?
     Map<dynamic,dynamic> response = jsonDecode(await rootBundle.loadString('wordDef.json'));
-    // print(response);
-    // String plural;
     String def;
     String example;
     if (response.containsKey(displayText)){
@@ -71,63 +70,40 @@ class _TextViewPageState extends State<TextViewPage> {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return SimpleDialog(
           title: Text(displayText,
-          style: TextStyle(fontWeight: FontWeight.w300)),
+            style: TextStyle(fontWeight: FontWeight.w300)
+          ),
           shape: RoundedRectangleBorder(
             borderRadius:BorderRadius.all(Radius.circular(10.0))
           ),
-          content:Builder(
-            builder:(context){
-              return Container(
-                child:Column(
-                  children: [RichText(
-                    text: TextSpan(
-                      text: "Definition: ",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold
-                        ),
-                      children:[TextSpan(
-                        text: def,
-                        style:TextStyle(
-                          fontWeight: FontWeight.w400
-                        )
-                        )
-                      ]
-                    ),
-                  ),
-                  SizedBox(
-                      height: 20,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      text: "Example: ",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold
-                        ),
-                      children:[TextSpan(
-                        text: example,
-                        style:TextStyle(
-                          fontWeight: FontWeight.w400
-                        )
-                        )
-                      ]
-                    ),
-                  ),]
+          children:<Widget>[
+            SimpleDialogOption(
+              child: MessageComponent(stringType:"Definition: ", content: def)
+            ),
+            SizedBox(height:20.0),
+            SimpleDialogOption(
+              child: MessageComponent(stringType:"Example: ", content: example)
+            ),
+            SimpleDialogOption(
+              child:RaisedButton(
+                onPressed: () => Navigator.pop(context),
+                child:Text(
+                  "Close",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white
+                  )
                 ),
-                height: 200,
-                width: 200
-              );
-            }
-            
-          ),
-          actions: [
-            CloseButton(
-              color: Colors.red,
-            ), 
-          ]
+                color: Colors.amber,
+                hoverColor: Colors.red,
+                padding: const EdgeInsets.symmetric(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                )
+              )
+            ),
+          ],
         );
       },
     );
