@@ -2,19 +2,21 @@ import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutterapp/AlertDialogView.dart';
-import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 
-class TextViewPage extends StatefulWidget {
+class DocViewPage extends StatefulWidget {
+  final String contents;
+
+  const DocViewPage ({ Key key, this.contents}): super(key: key);
   @override
-  _TextViewPageState createState() => _TextViewPageState();
+  _DocViewPageState createState() => _DocViewPageState();
 }
 
-class _TextViewPageState extends State<TextViewPage> {
+class _DocViewPageState extends State<DocViewPage> {
+  
   @override
   Widget build(BuildContext context) {
-    String fullText = 'The researchers found that word recall was greatest when the participants read aloud to themselves.\n\n"This study confirms that learning and memory benefit from active involvement," says study author Colin M. MacLeod, a professor and chair of the Department of Psychology at the University of Waterloo.';
+    String fullText = widget.contents;
     final textSpans = <TextSpan>[];
     fullText.splitMapJoin(
       RegExp('\\w+'),
@@ -51,7 +53,7 @@ class _TextViewPageState extends State<TextViewPage> {
       )],)
     );
   }
-  
+  /// Assumes the given path is a text-file-asset.
   Future<void> showMyDialog(BuildContext context, String displayText)async {
     //check if you can load something just once everytime the user opens?
     Map<dynamic,dynamic> response = jsonDecode(await rootBundle.loadString('wordDef.json'));
